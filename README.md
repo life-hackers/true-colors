@@ -1,5 +1,7 @@
 # true-colors
 
+[![Build Status](https://travis-ci.org/life-hackers/true-colors.svg?branch=master)](https://travis-ci.org/life-hackers/true-colors)
+
 > A tool to help you figure out colors in digital commons
 
 ## Build Setup
