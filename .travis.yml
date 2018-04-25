@@ -1,0 +1,17 @@
+sudo: required
+language: node_js
+node_js:
+    - "9.7.1"
+install:
+  - npm i
+before_script:
+  - npm run build
+cache:
+    directories:
+      - node_modules
+deploy:
+  skip-cleanup: true
+  github-token: '$token'
+  keep-history: true
+  provider: pages
+  local-dir: dist
