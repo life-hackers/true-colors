@@ -15,8 +15,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2",
+    "lodash": "^4.17.10",
     "normalize.css": "^8.0.0",
+    "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

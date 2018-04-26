@@ -1,21 +1,27 @@
 <template>
-  <div class='main'>
+  <div class='main' :style='style'>
     <h1> True Colors </h1>
     <router-view/>
   </div>
 </template>
 
 <script>
+import { store } from './store'
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      style: store.appStyle
+    }
+  }
 }
 </script>
 
 <style scoped>
 .main {
-  padding: 0 10%;
-  margin-top: 20%;
-  text-align: center;
+  padding-top: 15%;
+  align-items: center;
+  flex: 1 0 100%;
   color: #2c3e50;
   display: flex;
   flex-flow: column;
