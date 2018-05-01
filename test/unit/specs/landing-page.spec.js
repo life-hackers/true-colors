@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Target from '@/components/landing-page'
 
-describe(Target.name, () => {
+describe(Target.__file, () => {
   it('should render correct contents', () => {
     const Constructor = Vue.extend(Target)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('.info').textContent)
-      .to.contains('Show time!')
+    const el = vm.$el.querySelector('.hasha')
+    expect(el.nodeType).to.equal(1)
   })
 })

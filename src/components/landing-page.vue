@@ -1,44 +1,24 @@
 <template>
   <div id='id' class='host' :style='style'>
-    <div class='info'> Show time! {{ msg }} </div>
     <input class='hasha'
       type='text'
       v-model='style.background'
       placeholder='Givme a #hashbar'/>
-    <p></p>
-    <div class='raw'>
-      <div> RGB(A): {{ raw.rgb }} </div>
-      <div> HEX: {{ raw.hex }} </div>
-    </div>
+    <RgbView :value='raw'></RgbView>
   </div>
 </template>
 
 <script>
+import RgbView from './rgb-view.vue'
 import { debounce } from 'lodash'
 import { store } from '../store'
 
-function findTuples (str) {
-  return str.match(/\d{0,3}\.?\d+%?/g)
-}
-
-function rgb2Hex (rgb) {
-  const tup = findTuples(rgb).map(r => {
-    return parseFloat(r)
-  }).reduce((k, r) => {
-    const rs = r.toString(16)
-    return k + (rs.length === 1 ? ('0' + rs) : rs)
-  }, '')
-  return '#' + tup
-}
-
 export default {
-  name: 'landing-page',
+  components: { RgbView },
   methods: {
     updateRaw () {
       let a = this.$el ? getComputedStyle(this.$el) : {}
-      const bg = a['background-color']
-      this.raw.rgb = bg
-      this.raw.hex = rgb2Hex(bg)
+      this.$set(this, 'raw', a['background-color'])
       this.$forceUpdate()
     }
   },
@@ -50,13 +30,12 @@ export default {
   created () {
     setTimeout(() => {
       this.updateRaw()
-    }, 200)
+    }, 20)
   },
   data () {
     return {
-      raw: {},
-      style: store.appStyle,
-      msg: 'Get some random pink!'
+      raw: '',
+      style: store.appStyle
     }
   }
 }
