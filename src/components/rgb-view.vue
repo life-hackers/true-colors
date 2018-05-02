@@ -1,7 +1,7 @@
 <template>
   <div class='host'>
     <div class='rgb'> RGB(A): {{ rgb }} </div>
-    <div> HEX: {{ hex }} </div>
+    <div class='hex'> HEX: {{ hex }} </div>
   </div>
 </template>
 

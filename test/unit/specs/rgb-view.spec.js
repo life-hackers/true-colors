@@ -1,22 +1,24 @@
-import Vue from 'vue'
+import { shallow } from 'vue-test-utils'
 import Target from '@/components/rgb-view'
 
 describe(Target.__file, () => {
-  let vm, el
+  let vm
 
   beforeEach(() => {
-    const Constructor = Vue.extend(Target)
-    vm = new Constructor().$mount()
-    el = vm.$el
+    vm = shallow(Target)
   })
-  it('should have host class', () => {
-    expect(el.querySelector('.rgb').nodeType).to.equal(1)
+  it('should be instanciate', () => {
+    expect(vm.isVueInstance()).to.equal(true)
   })
-  xdescribe('#value', () => {
-    it('should run the name', () => {
-      vm.$set(vm, 'value', 'red')
-      vm.$forceUpdate()
-      expect(el.querySelector('.rgb').innerText).to.equal(1)
+  describe('#value', () => {
+    beforeEach(() => {
+      vm.setProps({ value: 'rgb(123,123,123)' })
+    })
+    it('should change .rgb text', () => {
+      expect(vm.find('.rgb').text()).to.contains('123,123,123')
+    })
+    it('should change .hex text', () => {
+      expect(vm.find('.hex').text()).to.contains('7b7b7b')
     })
   })
 })
