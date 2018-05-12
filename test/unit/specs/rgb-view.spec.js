@@ -1,24 +1,34 @@
-import { shallow } from 'vue-test-utils'
+import { mount } from 'vue-test-utils'
 import Target from '@/components/rgb-view'
 
 describe(Target.__file, () => {
-  let vm
+  let wrap, vm
 
   beforeEach(() => {
-    vm = shallow(Target)
+    wrap = mount(Target)
+    vm = wrap.vm
   })
   it('should be instanciate', () => {
-    expect(vm.isVueInstance()).to.equal(true)
+    expect(wrap.isVueInstance()).to.equal(true)
   })
   describe('#value', () => {
+    const testValue = 'rgb(123,123,123)'
     beforeEach(() => {
-      vm.setProps({ value: 'rgb(123,123,123)' })
+      wrap.setProps({ value: testValue })
     })
-    it('should change .rgb text', () => {
-      expect(vm.find('.rgb').text()).to.contains('123,123,123')
+    it('to has computed .rgb', () => {
+      expect(vm.rgb).to.equal(testValue)
     })
-    it('should change .hex text', () => {
-      expect(vm.find('.hex').text()).to.contains('7b7b7b')
+    it('to has computed .hex', () => {
+      expect(vm.hex).to.equal('#7b7b7b')
+    })
+    describe('dom', () => {
+      beforeEach(() => {
+        wrap.setProps({ value: testValue })
+      })
+      it('to has 2 .copy-box', () => {
+        expect(wrap.findAll('.copy-box').length).to.equal(2)
+      })
     })
   })
 })

@@ -1,11 +1,12 @@
 <template>
-  <div class='host'>
-    <div class='rgb'> RGB(A): {{ rgb }} </div>
-    <div class='hex'> HEX: {{ hex }} </div>
+  <div class='rgb-view'>
+    <CopyBox :label='"RGB(A)"'> {{ rgb }} </CopyBox>
+    <CopyBox :label='"HEX"'> {{ hex }} </CopyBox>
   </div>
 </template>
 
 <script>
+import CopyBox from './copy-box.vue'
 function findTuples (str = '') {
   return str.match(/\d{0,3}\.?\d+%?/g) || []
 }
@@ -21,6 +22,7 @@ function rgb2Hex (rgb) {
 }
 
 export default {
+  components: { CopyBox },
   props: ['value'],
   computed: {
     rgb () {
@@ -37,7 +39,7 @@ export default {
 </script>
 
 <style scoped>
-.host {
+.rgb-view {
   text-align: center;
 }
 </style>
