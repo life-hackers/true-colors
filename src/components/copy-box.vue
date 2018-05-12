@@ -37,6 +37,7 @@ export default {
   border-radius: 10px;
   display: flex;
   margin: 15px 0;
+  overflow: hidden;
 }
 .label, .slot {
   display: inline-block;
