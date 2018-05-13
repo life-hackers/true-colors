@@ -8,10 +8,11 @@ import App from './App'
 import { Gtag } from './plugins'
 import router from './router'
 
-const isProd = process.env.NODE_ENV === 'production'
-const isDev = process.env.NODE_ENV === 'development'
+const env = process.env.NODE_ENV
+const isProd = env === 'production'
+const isDev = env === 'development'
 Vue.use(Gtag, {
-  disabled: isProd,
+  disabled: !isProd,
   log: isDev,
   trackId: 'UA-119133959-1'
 })
