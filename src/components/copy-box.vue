@@ -21,6 +21,11 @@ export default {
         text: () => e.target.innerHTML.trim()
       })
       v.onClick(e)
+      this.$gaEvent('copy', {
+        category: this.label,
+        label: this.label,
+        value: e
+      })
       v.destroy()
     }
   },
