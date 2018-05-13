@@ -2,11 +2,11 @@ import { shallow } from 'vue-test-utils'
 import Target from '@/components/copy-box'
 
 describe(Target.__file, () => {
-  let wrap, vm
+  let wrap
 
   beforeEach(() => {
     wrap = shallow(Target)
-    vm = wrap.vm
+    // vm = wrap.vm
   })
   it('should be instanciate', () => {
     expect(wrap.isVueInstance()).to.equal(true)

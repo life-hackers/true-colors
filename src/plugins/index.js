@@ -1,1 +1,1 @@
-export * from './gtag'
+export { Gtag } from './gtag'
