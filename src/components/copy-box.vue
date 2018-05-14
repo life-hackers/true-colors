@@ -10,23 +10,16 @@
 </template>
 
 <script>
-import Clipboard from 'clipboard'
-
 export default {
   props: ['label'],
   methods: {
     copy (e) {
-      // https://github.com/zenorocha/clipboard.js/issues/389
-      const v = new Clipboard('.null', {
-        text: () => e.target.innerHTML.trim()
-      })
-      v.onClick(e)
+      this.$clip(e.target)
       this.$gaEvent('copy', {
         category: this.label,
         label: this.label,
         value: e
       })
-      v.destroy()
     }
   },
   data () {

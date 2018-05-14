@@ -1,7 +1,7 @@
 import 'normalize.css'
 import '@/assets/style.css'
 import Vue from 'vue'
-import { Gtag } from './plugins'
+import { Gtag, VueClipboard } from './plugins'
 
 const env = process.env.NODE_ENV
 const isProd = env === 'production'
@@ -14,5 +14,8 @@ export function loadPlugins () {
     disabled: !isProd,
     log: isDev,
     trackId: 'UA-119133959-1'
+  })
+  Vue.use(VueClipboard, {
+    alias: 'clip'
   })
 }
