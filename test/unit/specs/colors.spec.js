@@ -1,12 +1,12 @@
 import { mount } from 'vue-test-utils'
-import Target from '@/components/rgb-view'
+import Target from '@/components/colors'
 
 describe(Target.__file, () => {
-  let wrap, vm
+  let wrap
 
   beforeEach(() => {
-    wrap = mount(Target)
-    vm = wrap.vm
+    const value = '#ffffff'
+    wrap = mount(Target, { propsData: { value } })
   })
   it('should be instanciate', () => {
     expect(wrap.isVueInstance()).to.equal(true)
@@ -16,18 +16,12 @@ describe(Target.__file, () => {
     beforeEach(() => {
       wrap.setProps({ value: testValue })
     })
-    it('to has computed .rgb', () => {
-      expect(vm.rgb).to.equal(testValue)
-    })
-    it('to has computed .hex', () => {
-      expect(vm.hex).to.equal('#7b7b7b')
-    })
     describe('dom', () => {
       beforeEach(() => {
         wrap.setProps({ value: testValue })
       })
-      it('to has 2 .copy-box', () => {
-        expect(wrap.findAll('.copy-box').length).to.equal(2)
+      it('to has 3 .copy-box', () => {
+        expect(wrap.findAll('.copy-box').length).to.equal(3)
       })
     })
   })

@@ -4,18 +4,18 @@
     <input class='input' type='text'
       v-model='style.background'
       placeholder='Givme a #hashbar'/>
-    <RgbView :value='raw'></RgbView>
+    <Colors :value='raw'></Colors>
   </div>
 </template>
 
 <script>
 import Strips from './strips.vue'
-import RgbView from './rgb-view.vue'
+import Colors from './colors.vue'
 import { debounce } from 'lodash'
 import { store } from '../store'
 
 export default {
-  components: { RgbView, Strips },
+  components: { Colors, Strips },
   methods: {
     updateRaw () {
       let a = this.$el ? getComputedStyle(this.$el) : {}
@@ -47,7 +47,7 @@ export default {
 .landing-page {
   text-align: center;
 }
-.rgb-view, .input {
+.colors, .input {
   box-sizing: border-box;
   width: 400px;
   min-width: 400px;
