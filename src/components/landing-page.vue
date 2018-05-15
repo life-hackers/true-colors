@@ -17,25 +17,23 @@ import { store } from '../store'
 export default {
   components: { Colors, Strips },
   methods: {
-    updateRaw () {
+    updateRaw: function () {
       let a = this.$el ? getComputedStyle(this.$el) : {}
       this.$set(this, 'raw', a['background-color'])
       this.$forceUpdate()
     }
   },
-  watch: {
-    'style.background': debounce(function () {
-      this.updateRaw()
-    }, 400)
-  },
   created () {
-    setTimeout(() => {
+    this.updateRaw = debounce(this.updateRaw, 400)
+  },
+  watch: {
+    'style.background': function () {
       this.updateRaw()
-    }, 20)
+    }
   },
   data () {
     return {
-      raw: '',
+      raw: store.appStyle.background,
       style: store.appStyle
     }
   }

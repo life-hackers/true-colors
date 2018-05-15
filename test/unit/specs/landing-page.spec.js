@@ -2,12 +2,42 @@ import { shallow } from 'vue-test-utils'
 import Target from '@/components/landing-page'
 
 describe(Target.__file, () => {
-  let vm
+  let wrap, vm, clock
 
   beforeEach(() => {
-    vm = shallow(Target)
+    clock = sinon.useFakeTimers()
+    wrap = shallow(Target)
+    vm = wrap.vm
+  })
+  afterEach(() => {
+    clock.restore()
   })
   it('should be instanciate', () => {
-    expect(vm.isVueInstance()).to.equal(true)
+    expect(wrap.isVueInstance()).to.equal(true)
+  })
+  describe('#style.background', () => {
+    beforeEach(() => {
+      const style = { backgroud: 'pink' }
+      wrap.setData({ style })
+      clock.tick(500)
+    })
+    it('should update .raw', () => {
+      expect(vm.raw).to.equal('')
+    })
+  })
+  describe('#updateRaw', () => {
+    let spiSet, spiForce
+    beforeEach(() => {
+      spiSet = sinon.spy(wrap.vm, '$set')
+      spiForce = sinon.spy(wrap.vm, '$forceUpdate')
+      wrap.vm.updateRaw()
+      clock.tick(500)
+    })
+    it('should call $set', () => {
+      expect(spiSet.calledOnce).to.equal(true)
+    })
+    it('should call $forceUpdate', () => {
+      expect(spiForce.calledOnce).to.equal(true)
+    })
   })
 })

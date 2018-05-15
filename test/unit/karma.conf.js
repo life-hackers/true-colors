@@ -24,6 +24,9 @@ module.exports = function karmaConfig (config) {
     webpackMiddleware: {
       noInfo: true
     },
+    specReporter: {
+      showSpecTiming: true
+    },
     coverageReporter: {
       dir: './coverage',
       reporters: [

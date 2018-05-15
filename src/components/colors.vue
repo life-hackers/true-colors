@@ -1,23 +1,29 @@
 <template>
   <div class='colors'>
-    <CopyBox :label='"RGB(A)"'> {{ value }} </CopyBox>
-    <CopyBox :label='"HEX"'> {{ color.hex().toString() }} </CopyBox>
-    <CopyBox :label='"HSL"'> {{ color.hsl().round().toString() }} </CopyBox>
+    <CopyBox :label='"RGB(A)"'> {{ rgb }} </CopyBox>
+    <CopyBox :label='"HEX"'> {{ hex }} </CopyBox>
+    <CopyBox :label='"HSL"'> {{ hsl }} </CopyBox>
   </div>
 </template>
 
 <script>
-import * as Color from 'color'
 import CopyBox from './copy-box.vue'
-
-const color = Color.default || Color
 
 export default {
   components: { CopyBox },
   props: ['value'],
   computed: {
     color () {
-      return color(this.value)
+      return this.$color(this.value)
+    },
+    rgb () {
+      return this.color.rgb().toString()
+    },
+    hsl () {
+      return this.color.hsl().round().toString()
+    },
+    hex () {
+      return this.color.hex().toString()
     }
   },
   data () {
